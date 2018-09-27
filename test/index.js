@@ -13,6 +13,7 @@ var lte = semver.lte;
 var satisfies = semver.satisfies;
 var validRange = semver.validRange;
 var inc = semver.inc;
+var truncate = semver.truncate;
 var diff = semver.diff;
 var replaceStars = semver.replaceStars;
 var toComparators = semver.toComparators;
