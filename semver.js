@@ -1307,6 +1307,10 @@ function intersects(r1, r2, loose) {
   return r1.intersects(r2)
 }
 
+function removeLeadingZeros(num) {
+  return num.replace(/^0+(\d+$)/,'$1')
+}
+
 exports.coerce = coerce;
 function coerce(version) {
   if (version instanceof SemVer)
@@ -1317,8 +1321,15 @@ function coerce(version) {
 
   var match = version.match(re[COERCE]);
 
-  if (match == null)
+  if (match === null)
     return null;
+
+  // try to remove leading zeros in each major, minor and patch
+  for(var i=1; i<=match.length; i++){
+    if(match[i] !== undefined){
+      match[i] = removeLeadingZeros(match[i])
+    }
+  }
 
   return parse((match[1] || '0') + '.' + (match[2] || '0') + '.' + (match[3] || '0')); 
 }
